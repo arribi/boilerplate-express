@@ -14,8 +14,6 @@ app.use(function (req, res, next) {
 
 app.use("/public", express.static(__dirname + "/public"));
 
-
-
 app.get('/', (req, res) => {
   res.sendFile('views/index.html', { root: __dirname });
 });
@@ -28,6 +26,25 @@ app.get('/json', (req, res) => {
   }
   res.json({ "message": response });
 });
+
+app.get('/now', (req, res, next) => {
+  req.time = new Date().toString();
+  next();
+}, (req, res) => {
+  res.json({ "time": req.time });
+});
+
+app.get('/:word/echo', (req, res) => {
+  res.json({ "echo": req.params.word });
+});
+
+app.get('/name', (req, res) => {
+  res.json({ "name": req.query.first + " " + req.query.last });
+});
+
+app.post('/name', (req, res) => {
+  res.json({ "name": req.body.first + " " + req.body.last });
+})
 
 
 
