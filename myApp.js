@@ -7,6 +7,8 @@ let app = express();
 // app.get('/', function (req, res) {
 //   res.send('Hello Express');
 // });
+
+// CH 7
 app.use(function (req, res, next) {
   console.log(req.method + " " + req.path + " - " + req.ip);
   next();
@@ -14,10 +16,12 @@ app.use(function (req, res, next) {
 
 app.use("/public", express.static(__dirname + "/public"));
 
+// CH 4
 app.get('/', (req, res) => {
   res.sendFile('views/index.html', { root: __dirname });
 });
 
+// CH 5
 app.get('/json', (req, res) => {
   if (process.env.MESSAGE_STYLE === "uppercase") {
     response = "Hello json".toUpperCase();
@@ -27,6 +31,7 @@ app.get('/json', (req, res) => {
   res.json({ "message": response });
 });
 
+// CH 6
 app.get('/now', (req, res, next) => {
   req.time = new Date().toString();
   next();
@@ -34,6 +39,7 @@ app.get('/now', (req, res, next) => {
   res.json({ "time": req.time });
 });
 
+// CH 7
 app.get('/:word/echo', (req, res) => {
   res.json({ "echo": req.params.word });
 });
