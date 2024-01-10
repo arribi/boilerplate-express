@@ -39,11 +39,12 @@ app.get('/now', (req, res, next) => {
   res.json({ "time": req.time });
 });
 
-// CH 7
+// CH 8
 app.get('/:word/echo', (req, res) => {
   res.json({ "echo": req.params.word });
 });
 
+// CH 9
 app.get('/name', (req, res) => {
   res.json({ "name": req.query.first + " " + req.query.last });
 });
