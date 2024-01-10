@@ -3,8 +3,10 @@ require('dotenv').config();
 let express = require('express');
 let app = express();
 
+// CH 1
 // console.log("Hello World");
 
+// CH 2
 // app.get('/', function (req, res) {
 //   res.send('Hello Express');
 // });
@@ -15,12 +17,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use("/public", express.static(__dirname + "/public"));
-
-// CH 4
+// CH 3
 app.get('/', (req, res) => {
   res.sendFile('views/index.html', { root: __dirname });
 });
+
+//  CH 4
+app.use("/public", express.static(__dirname + "/public"));
 
 // CH 5
 app.get('/json', (req, res) => {
@@ -32,7 +35,7 @@ app.get('/json', (req, res) => {
   res.json({ "message": response });
 });
 
-// CH 6
+// CH 8
 app.get('/now', (req, res, next) => {
   req.time = new Date().toString();
   next();
@@ -40,25 +43,23 @@ app.get('/now', (req, res, next) => {
   res.json({ "time": req.time });
 });
 
-// CH 8
+// CH 9
 app.get('/:word/echo', (req, res) => {
   res.json({ "echo": req.params.word });
 });
 
-// CH 9
+// CH 10
 app.get('/name', (req, res) => {
   res.json({ "name": req.query.first + " " + req.query.last });
 });
 
-
-
-// CH 10
+// CH 11
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
 
-// app.post('/name', (req, res) => {
-//   res.json({ "name": req.body.first + " " + req.body.last });
-// })
+// CH 12
+app.post('/name', (req, res) => {
+  res.json({ "name": req.body.first + " " + req.body.last });
+})
 
 
 
